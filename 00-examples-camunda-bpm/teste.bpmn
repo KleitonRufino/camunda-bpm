@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_05scoj2" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:process id="parallelprocess" name="Parallel Process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" camunda:initiator="initiator">
+      <bpmn:outgoing>Flow_06yzi2i</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1dlvywg">
+      <bpmn:incoming>Flow_0jlm9ah</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0jlm9ah" sourceRef="teste" targetRef="Event_1dlvywg" />
+    <bpmn:serviceTask id="teste" name="teste" camunda:class="org.camunda.bpm.spring.boot.example.Teste">
+      <bpmn:incoming>Flow_06yzi2i</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jlm9ah</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_06yzi2i" sourceRef="StartEvent_1" targetRef="teste" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="parallelprocess">
+      <bpmndi:BPMNEdge id="Flow_0jlm9ah_di" bpmnElement="Flow_0jlm9ah">
+        <di:waypoint x="510" y="180" />
+        <di:waypoint x="590" y="180" />
+        <di:waypoint x="590" y="110" />
+        <di:waypoint x="742" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06yzi2i_di" bpmnElement="Flow_06yzi2i">
+        <di:waypoint x="228" y="97" />
+        <di:waypoint x="319" y="97" />
+        <di:waypoint x="319" y="180" />
+        <di:waypoint x="410" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="192" y="79" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1dlvywg_di" bpmnElement="Event_1dlvywg">
+        <dc:Bounds x="742" y="92" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0uoozkb_di" bpmnElement="teste">
+        <dc:Bounds x="410" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

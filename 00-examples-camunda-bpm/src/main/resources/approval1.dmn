@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="approvado" name="approvado" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <decision id="approval" name="approval">
+    <decisionTable id="DecisionTable_0h6icjy" hitPolicy="FIRST">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>someText</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="approved" typeRef="string" biodi:width="192" />
+      <rule id="DecisionRule_0jzbnjz">
+        <inputEntry id="UnaryTests_0jucj7h">
+          <text>"Camunda"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0df59d5">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0q1d0gs">
+        <inputEntry id="UnaryTests_0etrl76">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1gpeokh">
+          <text>0</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="approval">
+        <dc:Bounds height="80" width="180" x="340" y="170" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

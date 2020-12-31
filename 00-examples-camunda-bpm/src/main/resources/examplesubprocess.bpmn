@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1an2i4u" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:process id="examplesubprocess" name="Example Subprocess" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1mu6dsm</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1mu6dsm" sourceRef="StartEvent_1" targetRef="printhellowiitherror" />
+    <bpmn:boundaryEvent id="Event_13i9pe4" attachedToRef="printhellowiitherror">
+      <bpmn:outgoing>Flow_02sskg9</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1pmii3t" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1wi9u1r" sourceRef="printhellowiitherror" targetRef="Event_0n4vyij" />
+    <bpmn:serviceTask id="printhellowiitherror" name="printhellowittherror" camunda:delegateExpression="#{printhellowiitherror}">
+      <bpmn:incoming>Flow_1mu6dsm</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wi9u1r</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1edhefz" name="error">
+      <bpmn:incoming>Flow_02sskg9</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_07ktovq" errorRef="Error_0zlemst" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_02sskg9" sourceRef="Event_13i9pe4" targetRef="Event_1edhefz" />
+    <bpmn:endEvent id="Event_0n4vyij">
+      <bpmn:incoming>Flow_1wi9u1r</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmn:escalation id="Escalation_1qvas4q" name="Escalation_37ruc4b" />
+  <bpmn:error id="Error_0zlemst" name="error" errorCode="000" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="examplesubprocess">
+      <bpmndi:BPMNEdge id="Flow_02sskg9_di" bpmnElement="Flow_02sskg9">
+        <di:waypoint x="440" y="175" />
+        <di:waypoint x="440" y="220" />
+        <di:waypoint x="582" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wi9u1r_di" bpmnElement="Flow_1wi9u1r">
+        <di:waypoint x="440" y="117" />
+        <di:waypoint x="562" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mu6dsm_di" bpmnElement="Flow_1mu6dsm">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="340" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0n4vyij_di" bpmnElement="Event_0n4vyij">
+        <dc:Bounds x="562" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15xg73o_di" bpmnElement="printhellowiitherror">
+        <dc:Bounds x="340" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ubtdpl_di" bpmnElement="Event_1edhefz">
+        <dc:Bounds x="582" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="589" y="245" width="25" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1vinwkx_di" bpmnElement="Event_13i9pe4">
+        <dc:Bounds x="422" y="139" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
