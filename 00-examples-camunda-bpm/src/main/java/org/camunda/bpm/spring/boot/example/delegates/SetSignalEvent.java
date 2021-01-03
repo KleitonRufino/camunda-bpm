@@ -4,8 +4,8 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Service;
 
-@Service("setMessageEvent")
-public class SetMessageEvent implements JavaDelegate {
+@Service("setSignalEvent")
+public class SetSignalEvent implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
@@ -16,9 +16,8 @@ public class SetMessageEvent implements JavaDelegate {
 //		System.out.println("Numero gerado: " + execution.getVariable("numero"));
 //		if (randomWithNextInt % 2 == 0) {
 //		Thread.sleep(5000);}
-		System.out.println("message");
-		execution.getProcessEngine().getRuntimeService().createMessageCorrelation("mymessage").correlate();
-
+		System.out.println("signal");
+		execution.getProcessEngine().getRuntimeService().createSignalEvent("sinal2").send();
 	}
 
 }

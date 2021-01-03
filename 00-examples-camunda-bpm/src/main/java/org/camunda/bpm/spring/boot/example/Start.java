@@ -29,6 +29,11 @@ public class Start {
 
   public static void main(String[] args) throws FileNotFoundException {
     SpringApplication.run(Start.class, args);
+    /*{
+    "variables":{
+        "someText": {"value": "Camunda", "type": "string"}
+    }
+}*/
 	//http://localhost:8080/engine-rest/decision-definition/key/approval/evaluate
     //http://localhost:8080/engine-rest/process-definition/key/decisionTableGatewayOr/start
   }
