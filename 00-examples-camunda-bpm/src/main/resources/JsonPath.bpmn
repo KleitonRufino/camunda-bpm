@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_05scoj2" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:process id="JsonPath" name="JsonPath" isExecutable="true">
+    <bpmn:endEvent id="endEvent">
+      <bpmn:incoming>Flow_0z2rv1z</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="startEvent" camunda:initiator="initiator">
+      <bpmn:outgoing>Flow_18ug2ru</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="PrintJson" name="PrintJson" camunda:class="org.camunda.bpm.spring.boot.example.delegates.PrintJson">
+      <bpmn:incoming>Flow_18ug2ru</bpmn:incoming>
+      <bpmn:outgoing>Flow_0gdo6v6</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_18ug2ru" sourceRef="startEvent" targetRef="PrintJson" />
+    <bpmn:exclusiveGateway id="gatewayStart">
+      <bpmn:incoming>Flow_0gdo6v6</bpmn:incoming>
+      <bpmn:outgoing>gateway1</bpmn:outgoing>
+      <bpmn:outgoing>gateway2</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0gdo6v6" sourceRef="PrintJson" targetRef="gatewayStart" />
+    <bpmn:sequenceFlow id="gateway1" sourceRef="gatewayStart" targetRef="PrintHello">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${MyJsonPath.read(json, "$.firstName") == "John"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="printafter" name="printafter" camunda:class="org.camunda.bpm.spring.boot.example.delegates.PrintAfter">
+      <bpmn:incoming>gateway2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1pib5j7</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="PrintHello" name="PrintHello" camunda:class="org.camunda.bpm.spring.boot.example.delegates.PrintHello">
+      <bpmn:incoming>gateway1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0eq1080</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="gateway2" sourceRef="gatewayStart" targetRef="printafter" />
+    <bpmn:exclusiveGateway id="gatewayEnd">
+      <bpmn:incoming>Flow_1pib5j7</bpmn:incoming>
+      <bpmn:incoming>Flow_0eq1080</bpmn:incoming>
+      <bpmn:outgoing>Flow_0z2rv1z</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1pib5j7" sourceRef="printafter" targetRef="gatewayEnd" />
+    <bpmn:sequenceFlow id="Flow_0eq1080" sourceRef="PrintHello" targetRef="gatewayEnd" />
+    <bpmn:sequenceFlow id="Flow_0z2rv1z" sourceRef="gatewayEnd" targetRef="endEvent" />
+  </bpmn:process>
+  <bpmn:message id="Message_08px84x" name="continueprocess" />
+  <bpmn:message id="Message_0vu8bfg" name="startprocess" />
+  <bpmn:signal id="Signal_0lxc54x" name="sinal" />
+  <bpmn:message id="Message_0dlt4gm" name="mensagem" />
+  <bpmn:message id="Message_0ns9i5t" />
+  <bpmn:message id="Message_0ygvj5d" />
+  <bpmn:message id="Message_112spks" name="mymessage" />
+  <bpmn:message id="Message_0h6ck0x" name="Message_1ijtcts" />
+  <bpmn:signal id="Signal_0r7iukk" name="sinal2" />
+  <bpmn:message id="Message_0qff8ln" name="msg-s-1" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="JsonPath">
+      <bpmndi:BPMNEdge id="Flow_18ug2ru_di" bpmnElement="Flow_18ug2ru">
+        <di:waypoint x="228" y="207" />
+        <di:waypoint x="284" y="207" />
+        <di:waypoint x="284" y="240" />
+        <di:waypoint x="341" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gdo6v6_di" bpmnElement="Flow_0gdo6v6">
+        <di:waypoint x="440" y="207" />
+        <di:waypoint x="525" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16fifa3_di" bpmnElement="gateway1">
+        <di:waypoint x="550" y="182" />
+        <di:waypoint x="550" y="120" />
+        <di:waypoint x="680" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10ju8ln_di" bpmnElement="gateway2">
+        <di:waypoint x="550" y="232" />
+        <di:waypoint x="550" y="300" />
+        <di:waypoint x="680" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pib5j7_di" bpmnElement="Flow_1pib5j7">
+        <di:waypoint x="780" y="280" />
+        <di:waypoint x="880" y="280" />
+        <di:waypoint x="880" y="232" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0eq1080_di" bpmnElement="Flow_0eq1080">
+        <di:waypoint x="780" y="120" />
+        <di:waypoint x="880" y="120" />
+        <di:waypoint x="880" y="182" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z2rv1z_di" bpmnElement="Flow_0z2rv1z">
+        <di:waypoint x="905" y="207" />
+        <di:waypoint x="1002" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1xrazi5_di" bpmnElement="startEvent">
+        <dc:Bounds x="192" y="189" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ta0poy_di" bpmnElement="PrintJson">
+        <dc:Bounds x="340" y="167" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1b1s3z0_di" bpmnElement="gatewayStart" isMarkerVisible="true">
+        <dc:Bounds x="525" y="182" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12beojo_di" bpmnElement="printafter">
+        <dc:Bounds x="680" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03gwiww_di" bpmnElement="PrintHello">
+        <dc:Bounds x="680" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_13t81ck_di" bpmnElement="gatewayEnd" isMarkerVisible="true">
+        <dc:Bounds x="855" y="182" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1kv9b20_di" bpmnElement="endEvent">
+        <dc:Bounds x="1002" y="189" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
